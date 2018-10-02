@@ -2,12 +2,15 @@
   "name": "facilitator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://brainysoon.github.io/facilitator/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "react": "^16.5.2",
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "flow-bin": "^0.82.0",
+    "gh-pages": "^2.0.0",
     "husky": "^1.1.0",
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3"
