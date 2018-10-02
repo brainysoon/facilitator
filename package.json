@@ -2,17 +2,23 @@
   "name": "facilitator",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.3"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "flow": "flow"
+  },
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "2.0.3"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.82.0",
+    "husky": "^1.1.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -23,7 +29,15 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "flow-bin": "^0.82.0"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }
