@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-class Landing extends Component {
-  render() {
-    return <div>Unicorn</div>;
-  }
-}
+import FirstLandingPage from './pages/firstLandingPage';
+import LandingPage from './pages/landingPage';
 
-export default Landing;
+export default () => (
+  <Switch>
+    <Route exact path="/" component={LandingPage} />
+    <Route path="/first/landing" component={FirstLandingPage} />
+  </Switch>
+);

@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import rootReducer from './reducers/rootReducer';
+import { history } from '../shared/objects/browserObjects';
 
 const reduxDevTools =
   process.env.NODE_ENV !== 'production' &&
@@ -10,6 +12,6 @@ const reduxDevTools =
 const composeEnhancers = reduxDevTools || compose;
 
 export default createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(ReduxThunk))
+  connectRouter(history)(rootReducer),
+  composeEnhancers(applyMiddleware(routerMiddleware(history), ReduxThunk))
 );

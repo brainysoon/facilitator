@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
-import App from './App';
+import app from './app';
 import store from './store';
+import { history } from '../shared/objects/browserObjects';
 
 export default (
   <Provider store={store}>
-    <Router>{App}</Router>
+    <ConnectedRouter history={history}>{app}</ConnectedRouter>
   </Provider>
 );
