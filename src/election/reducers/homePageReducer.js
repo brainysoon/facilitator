@@ -1,28 +1,14 @@
 import { combineReducers } from 'redux';
 
-const initialState = {
-  electors: [
-    {
-      name: 'Peppa',
-      weight: 1
-    },
-    {
-      name: 'George',
-      weight: 0.5
-    },
-    {
-      name: 'Alexander',
-      weight: 0.8
-    },
-    {
-      name: 'Candy',
-      weight: 0.9
-    }
-  ]
-};
+import ElectionActionTypes from '../actions/electionActionTypes';
 
-const response = (state = initialState, action) => {
+const { ELECTION_FETCH_ELECTORS } = ElectionActionTypes;
+
+const response = (state = {}, action) => {
   switch (action.type) {
+    case ELECTION_FETCH_ELECTORS: {
+      return action.response;
+    }
     default: {
       return state;
     }

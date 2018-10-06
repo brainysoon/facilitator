@@ -20,10 +20,17 @@ import withConnectedReactRouter from '../../shared/enhancers/withConnectedReactR
 type Props = {
   classes: *,
   electors: [{ name: string, weight: number }],
-  startElect: () => void
+  startElect: () => void,
+  fetchElectors: () => void
 };
 
 class HomePage extends Component<Props> {
+  componentDidMount() {
+    const { fetchElectors } = this.props;
+
+    fetchElectors && fetchElectors();
+  }
+
   _handleElect = () => {
     const { electors, startElect, push } = this.props;
 
@@ -64,7 +71,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  startElect: ElectionActions.startElect
+  startElect: ElectionActions.startElect,
+  fetchElectors: ElectionActions.fetchElectors
 };
 
 const enhancers = _.flowRight(
