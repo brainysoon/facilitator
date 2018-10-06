@@ -9,5 +9,8 @@ export default {
   },
   content: {
     paddingTop: '4rem'
+  },
+  menuList: {
+    width: '12rem'
   }
 };
