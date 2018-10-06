@@ -15,6 +15,7 @@ import withAppBar from '../../shared/enhancers/withAppBar';
 import { getElectors } from '../selectors/homePageSelectors';
 import HomeStyles from '../styles/homeStyles';
 import * as ElectionActions from '../actions/electionActions';
+import withConnectedReactRouter from '../../shared/enhancers/withConnectedReactRouter';
 
 type Props = {
   classes: *,
@@ -24,9 +25,10 @@ type Props = {
 
 class HomePage extends Component<Props> {
   _handleElect = () => {
-    const { electors, startElect } = this.props;
+    const { electors, startElect, push } = this.props;
 
     startElect && startElect(electors);
+    push('/election/result');
   };
 
   render() {
@@ -68,6 +70,7 @@ const mapDispatchToProps = {
 const enhancers = _.flowRight(
   withAppBar,
   withStyles(HomeStyles),
+  withConnectedReactRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

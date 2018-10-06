@@ -12,7 +12,7 @@ const result = (state = initialState, action) => {
       return action.result;
     }
     default: {
-      return initialState;
+      return state;
     }
   }
 };
