@@ -77,6 +77,12 @@ const withAppBar = (options: Options = defaultOptions) => {
         );
       };
 
+      _handleAddElector = () => {
+        const { push } = this.props;
+
+        push && push('/election/add/elector');
+      };
+
       render() {
         const { classes, ...restProps } = this.props;
         const { open } = this.state;
@@ -100,7 +106,7 @@ const withAppBar = (options: Options = defaultOptions) => {
             >
               <div className={classes.menuList}>
                 <List>
-                  <ListItem button>
+                  <ListItem onClick={this._handleAddElector} button>
                     <ListItemIcon>
                       <AddIcon />
                     </ListItemIcon>

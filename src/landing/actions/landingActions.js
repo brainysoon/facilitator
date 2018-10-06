@@ -1,6 +1,5 @@
 // @flow
 
-import store from 'store2';
 import LandingActionTypes from './landingActionTypes';
 
 const {
@@ -10,7 +9,7 @@ const {
 
 export const fetchLandingStatus = () => {
   return (dispatch: *) => {
-    new Promise(resolve => resolve(store.get('LANDING_STATUS'))).then(value => {
+    new Promise(resolve => resolve({})).then(value => {
       dispatch({
         type: LANDING_FETCH_LANDING_STATUS,
         value
