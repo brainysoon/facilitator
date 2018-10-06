@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Home from './pages/home';
+import HomePage from './pages/homePage';
 
 export default ({ match }) => (
   <Switch>
-    <Route path={`${match.url}/home`} component={Home} />
+    <Route path={`${match.url}/home`} component={HomePage} />
   </Switch>
 );

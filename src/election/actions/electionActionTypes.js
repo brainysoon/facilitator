@@ -1,0 +1,3 @@
+export default {
+  ELECTION_START_ELECT: 'ELECTION_START_ELECT'
+};

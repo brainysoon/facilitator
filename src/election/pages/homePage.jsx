@@ -14,13 +14,21 @@ import StartIcon from '@material-ui/icons/PlayCircleFilled';
 import withAppBar from '../../shared/enhancers/withAppBar';
 import { getElectors } from '../selectors/homePageSelectors';
 import HomeStyles from '../styles/homeStyles';
+import * as ElectionActions from '../actions/electionActions';
 
 type Props = {
   classes: *,
-  electors: [{ name: string, weight: number }]
+  electors: [{ name: string, weight: number }],
+  startElect: () => void
 };
 
-class Home extends Component<Props> {
+class HomePage extends Component<Props> {
+  _handleElect = () => {
+    const { electors, startElect } = this.props;
+
+    startElect && startElect(electors);
+  };
+
   render() {
     const { classes, electors } = this.props;
 
@@ -35,7 +43,11 @@ class Home extends Component<Props> {
           ))}
         </List>
         <div className={classes.bottomKit}>
-          <Button variant="extendedFab" color="primary">
+          <Button
+            variant="extendedFab"
+            color="primary"
+            onClick={this._handleElect}
+          >
             <StartIcon />
             开始随机
           </Button>
@@ -49,7 +61,9 @@ const mapStateToProps = state => ({
   electors: getElectors(state)
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  startElect: ElectionActions.startElect
+};
 
 const enhancers = _.flowRight(
   withAppBar,
@@ -60,4 +74,4 @@ const enhancers = _.flowRight(
   )
 );
 
-export default enhancers(Home);
+export default enhancers(HomePage);
