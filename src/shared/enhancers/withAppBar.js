@@ -15,74 +15,116 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 import WithAppBarStyles from '../styles/withAppBarStyles';
+import withConnectedReactRouter from './withConnectedReactRouter';
 
 type Props = {
   classes: *
 };
 
-const withAppBar = Component => {
-  class WithAppBar extends React.Component<Props> {
-    state = {
-      open: false
-    };
+type Options = {
+  shouldShowMenu: boolean
+};
 
-    _toggleDrawer = (toggleState: boolean) => () => {
-      this.setState({
-        open: toggleState
-      });
-    };
+const defaultOptions = {
+  shouldShowMenu: true
+};
 
-    render() {
-      const { classes, ...restProps } = this.props;
-      const { open } = this.state;
+const withAppBar = (options: Options = defaultOptions) => {
+  const { shouldShowMenu } = options;
 
-      return (
-        <div className={classes.root}>
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="Menu"
-                onClick={this._toggleDrawer(true)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="title" color="inherit">
-                Unicorn
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <SwipeableDrawer
-            open={open}
-            onClose={this._toggleDrawer(false)}
-            onOpen={this._toggleDrawer(true)}
+  return Component => {
+    class WithAppBar extends React.Component<Props> {
+      state = {
+        open: false
+      };
+
+      _toggleDrawer = (toggleState: boolean) => () => {
+        this.setState({
+          open: toggleState
+        });
+      };
+
+      _renderMenuButton = () => {
+        const { classes } = this.props;
+
+        return (
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+            onClick={this._toggleDrawer(true)}
           >
-            <div className={classes.menuList}>
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <AddIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="添加新角色" />
-                </ListItem>
-              </List>
-              <Divider />
-              <List />
-            </div>
-          </SwipeableDrawer>
-          <div className={classes.content}>
-            <Component {...restProps} />
-          </div>
-        </div>
-      );
-    }
-  }
+            <MenuIcon />
+          </IconButton>
+        );
+      };
 
-  const enhancers = _.flowRight(withStyles(WithAppBarStyles));
-  return enhancers(WithAppBar);
+      _renderBackButton = () => {
+        const { classes, goBack } = this.props;
+
+        return (
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Back"
+            onClick={goBack}
+          >
+            <ArrowBack />
+          </IconButton>
+        );
+      };
+
+      render() {
+        const { classes, ...restProps } = this.props;
+        const { open } = this.state;
+
+        return (
+          <div className={classes.root}>
+            <AppBar className={classes.appBar}>
+              <Toolbar>
+                {shouldShowMenu
+                  ? this._renderMenuButton()
+                  : this._renderBackButton()}
+                <Typography variant="title" color="inherit">
+                  Unicorn
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <SwipeableDrawer
+              open={open}
+              onClose={this._toggleDrawer(false)}
+              onOpen={this._toggleDrawer(true)}
+            >
+              <div className={classes.menuList}>
+                <List>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <AddIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="添加新角色" />
+                  </ListItem>
+                </List>
+                <Divider />
+                <List />
+              </div>
+            </SwipeableDrawer>
+            <div className={classes.content}>
+              <Component {...restProps} />
+            </div>
+          </div>
+        );
+      }
+    }
+
+    const enhancers = _.flowRight(
+      withStyles(WithAppBarStyles),
+      withConnectedReactRouter
+    );
+    return enhancers(WithAppBar);
+  };
 };
 
 export default withAppBar;

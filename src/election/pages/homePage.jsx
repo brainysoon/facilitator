@@ -68,7 +68,7 @@ const mapDispatchToProps = {
 };
 
 const enhancers = _.flowRight(
-  withAppBar,
+  withAppBar(),
   withStyles(HomeStyles),
   withConnectedReactRouter,
   connect(
