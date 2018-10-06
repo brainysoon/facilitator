@@ -31,7 +31,7 @@ class LandingPage extends Component<Props> {
   }
 
   _handleNext = () => {
-    this.props.push('/home');
+    this.props.push('/election/home');
   };
 
   render() {
