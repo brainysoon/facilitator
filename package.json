@@ -2,7 +2,7 @@
   "name": "facilitator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://brainysoon.github.io/facilitator/",
+  "homepage": "https://facilitator.icusin.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
