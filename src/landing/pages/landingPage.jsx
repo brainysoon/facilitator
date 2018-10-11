@@ -39,7 +39,6 @@ class LandingPage extends Component<Props> {
 
     return (
       <div>
-        <img className={classes.brand} src={brand} />
         <Timer handleDone={this._handleNext} counter={counter} />
       </div>
     );
