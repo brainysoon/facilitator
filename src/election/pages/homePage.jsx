@@ -10,6 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import StartIcon from '@material-ui/icons/PlayCircleFilled';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import withAppBar from '../../shared/enhancers/withAppBar';
 import { getElectors } from '../selectors/homePageSelectors';
@@ -39,7 +42,7 @@ class HomePage extends Component<Props> {
   };
 
   render() {
-    const { classes, electors } = this.props;
+    const { classes, electors, deleteElector } = this.props;
 
     return (
       <div className={classes.root}>
@@ -48,6 +51,14 @@ class HomePage extends Component<Props> {
             <ListItem key={index}>
               <Avatar>{_.upperCase(elector.name[0])}</Avatar>
               <ListItemText primary={elector.name} />
+              <ListItemSecondaryAction>
+                <IconButton
+                  aria-label="Delete"
+                  onClick={() => deleteElector(elector)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
@@ -72,7 +83,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   startElect: ElectionActions.startElect,
-  fetchElectors: ElectionActions.fetchElectors
+  fetchElectors: ElectionActions.fetchElectors,
+  deleteElector: ElectionActions.deleteElector
 };
 
 const enhancers = _.flowRight(

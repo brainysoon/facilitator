@@ -70,3 +70,18 @@ export const addElector = elector => {
       .catch(() => {});
   };
 };
+
+export const deleteElector = elector => {
+  return dispatch => {
+    localforage
+      .getItem('electors')
+      .then(electors => {
+        delete electors[_.toUpper(elector.name)];
+        return localforage.setItem('electors', electors);
+      })
+      .then(() => {
+        dispatch(fetchElectors());
+      })
+      .catch(() => {});
+  };
+};
