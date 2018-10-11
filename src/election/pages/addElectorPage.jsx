@@ -5,11 +5,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 import * as ElectionActions from '../actions/electionActions';
 import withAppBar from '../../shared/enhancers/withAppBar';
+import AddElectorPageStyles from '../styles/addElectorPageStyles';
 
 type Props = {
+  classes: *,
   addElector: () => void
 };
 
@@ -27,15 +30,27 @@ class AddElectorPage extends Component<Props> {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        <Input
-          value={this.state.elector}
-          onChange={event => {
-            this.setState({ elector: event.target.value });
-          }}
-        />
-        <Button onClick={this._handleSubmit}>添加</Button>
+      <div className={classes.root}>
+        <form className={classes.formContainer} onSubmit={this._handleSubmit}>
+          <Input
+            value={this.state.elector}
+            placeholder="姓名"
+            onChange={event => {
+              this.setState({ elector: event.target.value });
+            }}
+          />
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            type="submit"
+          >
+            添加
+          </Button>
+        </form>
       </div>
     );
   }
@@ -48,6 +63,7 @@ const mapDispathToProps = {
 
 const enhancers = _.flowRight(
   withAppBar({ shouldShowMenu: false }),
+  withStyles(AddElectorPageStyles),
   connect(
     mapStateToProps,
     mapDispathToProps
