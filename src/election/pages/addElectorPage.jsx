@@ -21,7 +21,9 @@ class AddElectorPage extends Component<Props> {
     elector: ''
   };
 
-  _handleSubmit = () => {
+  _handleSubmit = event => {
+    event && event.stopPropagation();
+    event && event.preventDefault();
     const { addElector } = this.props;
     const { elector } = this.state;
 
