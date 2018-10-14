@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import SettingsActions from '../actions/settingsActionTypes';
 
-const { SETTINGS_TOGGLE_TOGGLES } = SettingsActions;
+const { SETTINGS_TOGGLE_TOGGLES, SETTINGS_FETCH_TOGGLES } = SettingsActions;
 
 const initialTogglesState = {
   landingAnimation: false
@@ -13,15 +13,9 @@ const initialTogglesState = {
 
 const toggles = (state = initialTogglesState, action) => {
   switch (action.type) {
+    case SETTINGS_FETCH_TOGGLES:
     case SETTINGS_TOGGLE_TOGGLES: {
-      const { toggles } = action;
-      const resultToggles = { ...state };
-      _.forEach(
-        toggles,
-        value => value && (resultToggles[value] = !resultToggles[value])
-      );
-
-      return resultToggles;
+      return action.toggles;
     }
     default: {
       return state;
