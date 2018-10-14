@@ -69,7 +69,7 @@ class HomePage extends Component<Props> {
             onClick={this._handleElect}
           >
             <StartIcon />
-            开始随机
+            <span> Start Random </span>
           </Button>
         </div>
       </div>

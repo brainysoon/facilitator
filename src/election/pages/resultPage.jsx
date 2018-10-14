@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {};
 
 const enhancers = _.flowRight(
-  withAppBar({ shouldShowMenu: false }),
+  withAppBar({ shouldShowMenu: false, title: 'Result' }),
   withStyles(ResultPageStyle),
   connect(
     mapStateToProps,

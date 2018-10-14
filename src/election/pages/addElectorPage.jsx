@@ -39,7 +39,7 @@ class AddElectorPage extends Component<Props> {
         <form className={classes.formContainer} onSubmit={this._handleSubmit}>
           <Input
             value={this.state.elector}
-            placeholder="姓名"
+            placeholder="Name"
             onChange={event => {
               this.setState({ elector: event.target.value });
             }}
@@ -50,7 +50,7 @@ class AddElectorPage extends Component<Props> {
             color="primary"
             type="submit"
           >
-            添加
+            Submit
           </Button>
         </form>
       </div>
@@ -64,7 +64,7 @@ const mapDispathToProps = {
 };
 
 const enhancers = _.flowRight(
-  withAppBar({ shouldShowMenu: false }),
+  withAppBar({ shouldShowMenu: false, title: 'AddElector' }),
   withStyles(AddElectorPageStyles),
   connect(
     mapStateToProps,

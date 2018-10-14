@@ -118,7 +118,7 @@ const withAppBar = (options: Options = defaultOptions) => {
                     <ListItemIcon>
                       <AddIcon />
                     </ListItemIcon>
-                    <ListItemText primary="添加新角色" />
+                    <ListItemText primary="Add Elector" />
                   </ListItem>
                 </List>
                 <Divider />
@@ -130,7 +130,7 @@ const withAppBar = (options: Options = defaultOptions) => {
                     <ListItemIcon>
                       <SettingsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="设置" />
+                    <ListItemText primary="Settings" />
                   </ListItem>
                 </List>
               </div>
