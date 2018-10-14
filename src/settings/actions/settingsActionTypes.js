@@ -1,0 +1,3 @@
+export default {
+  SETTINGS_TOGGLE_TOGGLES: 'SETTINGS_TOGGLE_TOGGLES'
+};

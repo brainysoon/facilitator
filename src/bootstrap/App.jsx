@@ -14,9 +14,15 @@ const Landing = Loadable({
   loading: Spinner
 });
 
+const Settings = Loadable({
+  loader: () => import('../settings'),
+  loading: Spinner
+});
+
 export default (
   <Switch>
     <Route path="/election" component={Election} />
+    <Route path="/settings" component={Settings} />
     <Route path="/" component={Landing} />
   </Switch>
 );

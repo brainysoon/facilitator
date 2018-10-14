@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsIcon from '@material-ui/icons/Settings';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
 import WithAppBarStyles from '../styles/withAppBarStyles';
@@ -25,15 +26,17 @@ type Props = {
 };
 
 type Options = {
-  shouldShowMenu: boolean
+  shouldShowMenu: boolean,
+  title: string
 };
 
 const defaultOptions = {
-  shouldShowMenu: true
+  shouldShowMenu: true,
+  title: 'Unicorn'
 };
 
 const withAppBar = (options: Options = defaultOptions) => {
-  const { shouldShowMenu } = options;
+  const { shouldShowMenu, title } = options;
 
   return Component => {
     class WithAppBar extends React.Component<Props> {
@@ -77,10 +80,10 @@ const withAppBar = (options: Options = defaultOptions) => {
         );
       };
 
-      _handleAddElector = () => {
+      _handleItemClick = (toPath: string) => {
         const { push } = this.props;
 
-        push && push('/election/add/elector');
+        push && push(toPath);
       };
 
       render() {
@@ -95,7 +98,7 @@ const withAppBar = (options: Options = defaultOptions) => {
                   ? this._renderMenuButton()
                   : this._renderBackButton()}
                 <Typography variant="title" color="inherit">
-                  Unicorn
+                  {title}
                 </Typography>
               </Toolbar>
             </AppBar>
@@ -106,7 +109,12 @@ const withAppBar = (options: Options = defaultOptions) => {
             >
               <div className={classes.menuList}>
                 <List>
-                  <ListItem onClick={this._handleAddElector} button>
+                  <ListItem
+                    onClick={() =>
+                      this._handleItemClick('/election/add/elector')
+                    }
+                    button
+                  >
                     <ListItemIcon>
                       <AddIcon />
                     </ListItemIcon>
@@ -114,7 +122,17 @@ const withAppBar = (options: Options = defaultOptions) => {
                   </ListItem>
                 </List>
                 <Divider />
-                <List />
+                <List>
+                  <ListItem
+                    onClick={() => this._handleItemClick('/settings/toggles')}
+                    button
+                  >
+                    <ListItemIcon>
+                      <SettingsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="设置" />
+                  </ListItem>
+                </List>
               </div>
             </SwipeableDrawer>
             <div className={classes.content}>
