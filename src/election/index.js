@@ -7,6 +7,7 @@ import AddElectorPage from './pages/addElectorPage';
 
 export default ({ match }) => (
   <Switch>
+    <Route exact path="/" component={HomePage} />
     <Route path={`${match.url}/home`} component={HomePage} />
     <Route path={`${match.url}/result`} component={ResultPage} />
     <Route path={`${match.url}/add/elector`} component={AddElectorPage} />

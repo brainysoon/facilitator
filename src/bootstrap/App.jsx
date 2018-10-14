@@ -9,11 +9,6 @@ const Election = Loadable({
   loading: Spinner
 });
 
-const Landing = Loadable({
-  loader: () => import('../landing'),
-  loading: Spinner
-});
-
 const Settings = Loadable({
   loader: () => import('../settings'),
   loading: Spinner
@@ -21,8 +16,8 @@ const Settings = Loadable({
 
 export default (
   <Switch>
+    <Route exact path="/" component={Election} />
     <Route path="/election" component={Election} />
     <Route path="/settings" component={Settings} />
-    <Route path="/" component={Landing} />
   </Switch>
 );
