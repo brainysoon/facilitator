@@ -3,12 +3,12 @@
   "name": "The official facilitator PWA app",
   "icons": [
     {
-      "src": "%PUBLIC_URL%/unicorn_192.png",
+      "src": "unicorn_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "%PUBLIC_URL%/unicorn_512.png",
+      "src": "unicorn_512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
