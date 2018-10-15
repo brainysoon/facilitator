@@ -29,7 +29,7 @@ class TogglesPage extends Component<Props> {
   };
 
   render() {
-    const { classes, toggles, toggleToggles } = this.props;
+    const { classes, toggles } = this.props;
 
     return (
       <div className={classes.root}>
