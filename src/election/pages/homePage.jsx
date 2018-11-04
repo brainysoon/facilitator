@@ -13,6 +13,11 @@ import StartIcon from '@material-ui/icons/PlayCircleFilled';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import withAppBar from '../../shared/enhancers/withAppBar';
 import { getElectors } from '../selectors/homePageSelectors';
@@ -28,6 +33,13 @@ type Props = {
 };
 
 class HomePage extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      noElectors: false
+    };
+  }
+
   componentDidMount() {
     const { fetchElectors } = this.props;
 
@@ -37,8 +49,20 @@ class HomePage extends Component<Props> {
   _handleElect = () => {
     const { electors, startElect, push } = this.props;
 
+    if (_.isEmpty(electors)) {
+      return this.setState({
+        noElectors: true
+      });
+    }
+
     startElect && startElect(electors);
     push('/election/result');
+  };
+
+  _handleNoElectorsDialogClose = () => {
+    this.setState({
+      noElectors: false
+    });
   };
 
   render() {
@@ -62,6 +86,26 @@ class HomePage extends Component<Props> {
             </ListItem>
           ))}
         </List>
+        <Dialog
+          open={this.state.noElectors}
+          onClose={this._handleNoElectorsDialogClose}
+        >
+          <DialogTitle>No electors</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              You must have one or more electors!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={this._handleNoElectorsDialogClose}
+              color="primary"
+              autoFocus
+            >
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
         <div className={classes.bottomKit}>
           <Button
             variant="extendedFab"
